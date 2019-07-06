@@ -47,12 +47,13 @@ Otherwise you can use a function which returns same results:
 | api_key | null | `xxx` | Create an [API Account](https://www.last.fm/api/account/create) and get your API Key (*) |
 | image_size | `medium` | `small`, `medium`, `large`  or `extralarge` | Set an image size for latest song album |
 | limit | 10 | int < 50 | Max 50 tracks allowed by Last.fm |
+| cache_lifetime | 500 | `int` (seconds) | How much long should keep data stored in cache |
 
 (*) Required
 
 ## Extending
 
-Use a SCSS-compiler, like LibSass, and compile scss/sharer.scss to your assets in the plugin-folder. For example: `sass --watch --source-map true scss/sharer.scss assets/sharer.css`.
+Use a SCSS-compiler, like LibSass, and compile assets/scss/lastfm.scss to your assets in the plugin-folder. For example: `sass --watch --source-map true assets/scss/lastfm.scss assets/scss/lastfm.css`.
 
 ## License
 
