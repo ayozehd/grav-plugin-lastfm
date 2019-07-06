@@ -1,0 +1,143 @@
+.lastfm-scrobbler {
+    display: block;
+    padding: 0 4px;
+    box-sizing: border-box;
+
+    .lastfm-featured {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        max-width: 100%;
+        padding: .5rem .2rem;
+
+        .lastfm-featured-image,
+        .lastfm-info {
+            width: auto;
+            align-items: center;
+        }
+
+        .lastfm-featured-image img.album-image {
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lastfm-info {
+            max-width: 100%;
+            width: auto;
+            color: #111;
+            display: block;
+            padding-left: 12px;
+
+            p {
+                margin: 0;
+                font-size: 11px;
+                white-space: nowrap; 
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            .track-name {
+                color: #6c757d;
+            }
+
+            .track-album {
+                font-style: italic;
+            }
+
+            span.lastfm-nowplaying {
+                z-index: 3;
+                display: inline-block;
+                content: '';
+                height: 15px;
+                width: 15px;
+                background: transparent url($lastfm-nowplaying-icon) no-repeat;
+                background-size: 15px 15px;
+                background-position: 50% 50%;
+
+                &:after {
+                    z-index: 1;
+                    animation: shine 1.5s ease-in-out infinite;
+                    animation-fill-mode: forwards;
+                    opacity: 1;
+                    content: '';
+                    width: 15px;
+                    height: 15px;
+                    display: block;
+                    transform: rotate(30deg);
+                    background: rgba(255, 255, 255, 0);
+                    background: linear-gradient(
+                        to right, 
+                        rgba(255, 255, 255, 0.13) 0%,
+                        rgba(255, 255, 255, 0.25) 77%,
+                        rgba(255, 255, 255, 0.5) 92%,
+                        rgba(255, 255, 255, 0.0) 100%
+                    );
+                }
+            }
+        }
+        
+    }
+
+    .lastfm-featured.size-large,
+    .lastfm-featured.size-extralarge {
+        flex-wrap: wrap;
+    }
+
+    .lastfm-featured.size-small .lastfm-featured-image,
+    .lastfm-featured.size-medium .lastfm-featured-image {
+        align-self: center;
+    }
+
+    .lastfm-featured.size-large .lastfm-featured-image,
+    .lastfm-featured.size-extralarge .lastfm-featured-image,
+    .lastfm-featured.size-large .lastfm-info,
+    .lastfm-featured.size-extralarge .lastfm-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    .lastfm-featured.size-small .lastfm-info {
+
+        .lastfm-nowplaying {
+            height: 12px;
+            background-position: 50% 0%;
+        }
+    }
+
+    .lastfm-featured.size-medium .lastfm-info {
+        .track-name {
+            font-size: 105%;
+        }
+    }
+
+    .lastfm-featured.size-large .lastfm-info {
+        margin: .5rem 0;
+        padding: 0;
+
+        .track-name {
+            font-size: 120%;
+        }
+
+        p {
+            font-size: 110%;
+        }
+        
+    }
+
+    .lastfm-featured.size-extralarge .lastfm-info  {
+        margin: .5rem 0;
+        padding: 0;
+
+        .track-name {
+            font-size: 140%;
+        }
+
+        p {
+            margin: .2rem 0;
+            font-size: 115%;
+        }
+    }
+}
