@@ -46,7 +46,7 @@ Otherwise you can use a function which returns same results:
 | lastfm_user | null | `username` | Your Last.fm username (*) |
 | api_key | null | `xxx` | Create an [API Account](https://www.last.fm/api/account/create) and get your API Key (*) |
 | image_size | `medium` | `small`, `medium`, `large`  or `extralarge` | Set an image size for latest song album |
-| limit | 10 | int < 50 | Max 50 tracks allowed by Last.fm |
+| limit | 10 | `int` < 50 | Max 50 tracks allowed by Last.fm |
 | cache_lifetime | 500 | `int` (seconds) | How much long should keep data stored in cache |
 
 (*) Required

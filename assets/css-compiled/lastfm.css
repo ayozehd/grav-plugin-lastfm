@@ -60,15 +60,13 @@
         .lastfm-scrobbler .lastfm-featured .lastfm-info span.lastfm-nowplaying:after {
           z-index: 1;
           animation: shine 1.5s ease-in-out infinite;
-          animation-fill-mode: forwards;
           opacity: 1;
           content: '';
           width: 15px;
           height: 15px;
           display: block;
-          transform: rotate(30deg);
-          background: rgba(255, 255, 255, 0);
-          background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.25) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0) 100%); }
+          background-color: rgba(255, 255, 255, 0);
+          background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.13) 56%, rgba(255, 255, 255, 0.22) 77%, rgba(255, 255, 255, 0.5) 92%, rgba(255, 255, 255, 0) 100%); }
   .lastfm-scrobbler .lastfm-featured.size-large,
   .lastfm-scrobbler .lastfm-featured.size-extralarge {
     flex-wrap: wrap; }
