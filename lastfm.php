@@ -66,11 +66,11 @@ class LastfmPlugin extends Plugin
                 $this->grav['log']->error('plugin.lastfm: '. $e->getMessage());
             }
 
+            $cache->save($this->lastfm_cache_id, $data, $config['cache_lifetime']);
+
         } else {
             $this->grav['debugger']->addMessage('lastfm cache hit.');
-        }
-
-        $cache->save($this->lastfm_cache_id, $data, $config['cache_lifetime']);
+        }        
 
         $this->grav['twig']->twig_vars['lastfm_scrobbling'] = $data;
     }
@@ -83,7 +83,7 @@ class LastfmPlugin extends Plugin
     }
 
     /**
-     * Add simple `sharer()` Twig function
+     * Add simple `lastfm()` Twig function
      */
     public function onTwigInitialized()
     {
@@ -96,7 +96,7 @@ class LastfmPlugin extends Plugin
         return $this->grav['twig']->processTemplate('partials/lastfm.html.twig');
     }
 
-    public function scrobblingRequest($apiKey, $username, $limit = 10) {
+    private function scrobblingRequest($apiKey, $username, $limit = 10) {
 
         $url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='.$username.'&api_key='.$apiKey.'&limit='.$limit.'&format=json';
 
@@ -110,6 +110,11 @@ class LastfmPlugin extends Plugin
 
         $content = json_decode($json, true);
         
+        return $this->parseScrobblingData($content);
+    }
+
+    private function parseScrobblingData($content) {
+
         $items = [];
         foreach($content['recenttracks']['track'] as $track) {
             // Track data

@@ -44,7 +44,7 @@
         text-overflow: ellipsis;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale; }
-      .lastfm-scrobbler .lastfm-featured .lastfm-info .track-name {
+      .lastfm-scrobbler .lastfm-featured .lastfm-info .track-name a {
         color: #6c757d; }
       .lastfm-scrobbler .lastfm-featured .lastfm-info .track-album {
         font-style: italic; }

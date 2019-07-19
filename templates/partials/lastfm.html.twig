@@ -11,10 +11,12 @@
         {% endif %}
         <div class="lastfm-info">
             <p class="track-name">
-                {{ last_track.name }}
-                {% if last_track.nowplaying == true %}
-                    <span class="lastfm-nowplaying"></span>
-                {% endif %}
+                <a href="{{ last_track.url|defined('#') }}">
+                    {{ last_track.name }}
+                    {% if last_track.nowplaying == true %}
+                        <span class="lastfm-nowplaying"></span>
+                    {% endif %}
+                </a>                
             </p>
             <p class="track-astist">{{ last_track.artist }}</p>
             <p class="track-album">{{ last_track.album }}</p>
