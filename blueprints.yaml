@@ -1,15 +1,17 @@
 name: Last.fm
-version: 0.2
+version: 1.0
 description: A simple Last.fm scrobbler
 icon: headphones
 author:
   name: Ayoze Hernández Díaz
   email: ayoze.dev@gmail.com
-homepage: https://github.com/ayozehd/sharer
+homepage: https://github.com/ayozehd/lastfm
 keywords: plugin, music, scrobbler, lastfm
-bugs: https://github.com/ayozehd/sharer/issues
-docs: https://github.com/ayozehd/sharer/blob/master/README.md
+bugs: https://github.com/ayozehd/lastfm/issues
+docs: https://github.com/ayozehd/lastfm/blob/master/README.md
 license: MIT
+dependencies:
+    - { name: grav, version: '>=1.6' }
 
 form:
   validation: strict
