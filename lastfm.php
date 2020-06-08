@@ -6,6 +6,9 @@ use Exception;
 
 class LastfmPlugin extends Plugin
 {
+
+    const DEFAULT_PATH = '/_lastfm';
+
     protected $lastfm_cache_id;
 
     public static function getSubscribedEvents() {
@@ -13,6 +16,7 @@ class LastfmPlugin extends Plugin
             'onPluginsInitialized' => ['onPluginsInitialized', 0],
         ];
     }
+
     public function onPluginsInitialized()
     {
         if ($this->isAdmin()) {
@@ -22,16 +26,76 @@ class LastfmPlugin extends Plugin
         $this->initSetup();
 
         $this->enable([
+            'onPagesInitialized' => ['pluginVueAppEndpoint', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
-            'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
             'onAssetsInitialized' => ['onAssetsInitialized', 0],
-            'onTwigInitialized'   => ['onTwigInitialized', 0]
+            'onTwigInitialized'   => ['onTwigInitialized', 0],
         ]);
     }
 
     private function initSetup()
     {
-        $this->lastfm_cache_id = md5('lastfm-scrobbler'.$this->grav['cache']->getKey());
+        $this->lastfm_cache_id = 'lastfm-scrobbler-'.$this->grav['cache']->getKey();
+    }
+
+
+    public function pluginVueAppEndpoint()
+    {
+        if (strpos($this->grav['uri']->path(), $this->config->get('plugins.lastfm.path', self::DEFAULT_PATH)) === false) {
+            return;
+        }
+
+        $output = [
+            'width' => $this->config->get('plugins.lastfm.width'),
+            'height' => $this->config->get('plugins.lastfm.height'),
+            'background_color' => $this->config->get('plugins.lastfm.background_color'),
+            'display' => $this->config->get('plugins.lastfm.display'),
+        ];
+
+        $data = null;
+
+        $cache_enabled = $this->config->get('plugins.lastfm.cache_enabled');
+        
+        if($cache_enabled) {
+            $cache = $this->grav['cache'];
+
+            if($data = $cache->fetch($this->lastfm_cache_id)) {
+
+                $this->grav['debugger']->addMessage('lastfm cache hit.');
+
+            } else {
+                $this->grav['debugger']->addMessage('lastfm plugin cache miss.');
+            }
+        }
+
+        if(!$data) {
+            $username = $this->config->get('plugins.lastfm.lastfm_username');
+            $api_key = $this->config->get('plugins.lastfm.api_key');
+            
+            if (!$username || !$api_key) {
+                $output['error'] = 'Your Last.fm username or API Key is not configured. Please review your plugin settings.';
+            } else {
+                try {
+                    $data = $this->lastfmApiRequest(
+                        $api_key,
+                        $username,
+                        $this->config->get('plugins.lastfm.limit')
+                    );
+    
+                } catch(Exception $e) {
+                    $this->grav['log']->error('plugin.lastfm: '. $e->getMessage());
+                }
+
+                if ($cache_enabled)
+                    $cache->save($this->lastfm_cache_id, $data, $this->config->get('plugins.lastfm.cache_lifetime'));
+            }
+        }
+
+        $output['slides'] = $data;
+
+        header('Content-Type: application/json');
+        echo json_encode($output);
+        exit();
     }
 
     /**
@@ -42,44 +106,13 @@ class LastfmPlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
     }
 
-    /**
-     * Add CSS and JS to page header
-     */
-    public function onTwigSiteVariables()
-    {
-        $config = $this->config->get('plugins.lastfm');
-
-        $cache = $this->grav['cache'];
-
-        $data = $cache->fetch($this->lastfm_cache_id);
-
-        if(!$data) {
-
-            $this->grav['debugger']->addMessage('lastfm cache miss.');
-
-            try {
-                
-                $data = $this->scrobblingRequest($config['api_key'], $config['lastfm_user'], $config['limit']);
-
-            } catch(Exception $e) {
-
-                $this->grav['log']->error('plugin.lastfm: '. $e->getMessage());
-            }
-
-            $cache->save($this->lastfm_cache_id, $data, $config['cache_lifetime']);
-
-        } else {
-            $this->grav['debugger']->addMessage('lastfm cache hit.');
-        }        
-
-        $this->grav['twig']->twig_vars['lastfm_scrobbling'] = $data;
-    }
-
     public function onAssetsInitialized()
     {
-        if ($this->config->get('plugins.lastfm.built_in_css')) {
-            $this->grav['assets']->addCss('plugin://lastfm/assets/css-compiled/lastfm.css');
-        }
+        $this->grav['assets']->addCss('plugin://lastfm/dist/style.css');
+        $this->grav['assets']->addInlineJs(sprintf("window.lastfm_path = '%s';", $this->config->get('plugins.lastfm.path')));
+        $this->grav['assets']->addJs('plugin://lastfm/dist/main.js', [
+            'loading' => 'defer'
+        ]);
     }
 
     /**
@@ -96,7 +129,7 @@ class LastfmPlugin extends Plugin
         return $this->grav['twig']->processTemplate('partials/lastfm.html.twig');
     }
 
-    private function scrobblingRequest($apiKey, $username, $limit = 10) {
+    private function lastfmApiRequest($apiKey, $username, $limit = 10) {
 
         $url = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='.$username.'&api_key='.$apiKey.'&limit='.$limit.'&format=json';
 

@@ -1,12 +1,12 @@
 name: Last.fm
-version: 1.0
+version: 2.0.0
 description: A simple Last.fm scrobbler
 icon: headphones
 author:
   name: Ayoze Hernández Díaz
   email: ayoze.dev@gmail.com
 homepage: https://github.com/ayozehd/lastfm
-keywords: plugin, music, scrobbler, lastfm
+keywords: plugin, music, scrobbler, lastfm, cover, vue
 bugs: https://github.com/ayozehd/lastfm/issues
 docs: https://github.com/ayozehd/lastfm/blob/master/README.md
 license: MIT
@@ -26,48 +26,95 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
-    built_in_css:
-      type: toggle
-      label: Built-in CSS
-      highlight: 1
-      default: 1
-      options:
-        1: PLUGIN_ADMIN.ENABLED
-        0: PLUGIN_ADMIN.DISABLED
-      validate:
-        type: bool
-    api_key:
-      type: text
-      label: API Key
-      placeholder: Your Last.fm application key
-      help: Go to https://www.last.fm/api/account/create and create an API account to get your key.
-    lastfm_user:
-      type: text
-      label: Last.fm Username
-      placeholder: Username
-      help: Find your Last.fm username in your profile
-    image_size:
-      type: select
-      size: medium
-      label: Image size
-      help: Choose a image size for album image
-      default: medium
-      options:
-        small: Small
-        medium: Medium
-        large: Large
-        extralarge: Extralarge
-    limit:
-      type: number
-      size: small
-      label: Limit tracks
-      help: 'Limit amount of tracks to fetch from Last.fm. Max: 50'
-      validate:
-        max: 50
-        min: 1
-    cache_lifetime:
-      type: number
-      size: x-small
-      label: Cache lifetime
-      help: 'Define how much long should keep data stored in cache.'
-      append: seconds
+    security.fieldset:
+      type: fieldset
+      title: Security
+      info: API Key
+      markdown: true
+      text: 'Signup or login Last.fm and then [create an API account](https://www.last.fm/api/account/create) to get your API Key:'
+      icon: lock
+      collapsible: true
+      fields:
+        api_key:
+          type: text
+          label: API Key
+          placeholder: Last.fm API key
+          help: Create a Last.fm API account to get your key.
+        lastfm_username:
+          type: text
+          label: Last.fm Username
+          placeholder: Username
+          help: Find your Last.fm username in your profile
+        limit:
+          type: number
+          size: small
+          label: Limit
+          help: 'Number of tracks to display in the carousel. Last.fm limitation up to 50'
+          validate:
+            max: 50
+            min: 1
+    appearance.fieldset:
+      type: fieldset
+      title: Appearance
+      icon: paint-brush
+      collapsible: true
+      fields:
+        width:
+          type: number
+          size: small
+          label: Width
+          help: Main cover width
+        height:
+          type: number
+          size: small
+          label: Height
+          help: Main cover height
+        image_size:
+          type: select
+          size: small
+          label: Image size
+          help: Choose a image size for album image
+          default: medium
+          options:
+            small: Small
+            medium: Medium
+            large: Large
+            extralarge: Extralarge
+        display:
+          type: number
+          size: small
+          label: Display tracks
+          help: 'Number of covers in slide. Max: 25'
+          validate:
+            max: 25
+            min: 1
+        background_color:
+          type: colorpicker
+          label: Background color
+    advanced.fieldset:
+      type: fieldset
+      title: Advanced
+      icon: flask
+      collapsible: true
+      fields:
+        path:
+          type: text
+          label: Route
+          placeholder: '/_lastfm/'
+          help: You might want change this value only in case of collision with your pages. Otherwise set it as default.
+        cache_enabled:
+          type: toggle
+          label: Cache enabled
+          highlight: 1
+          default: 1
+          options:
+            1: PLUGIN_ADMIN.ENABLED
+            0: PLUGIN_ADMIN.DISABLED
+          validate:
+            type: bool
+        cache_lifetime:
+          type: number
+          size: x-small
+          label: Cache lifetime
+          help: 'Define how much long should keep data stored in cache.'
+          append: seconds

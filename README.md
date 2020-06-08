@@ -1,6 +1,6 @@
 # Last.fm Plugin
 
-**Last.fm** is a plugin for [Grav](http://github.com/getgrav/grav) that adds a scrobbling list of your latest played songs thanks to [Last.fm](https://last.fm) API.
+Plugin for [Grav](http://github.com/getgrav/grav) that adds a cover scrobbler of your latest played songs thanks to [Last.fm](https://last.fm) API.
 
 ![](screenshot.png)
 
