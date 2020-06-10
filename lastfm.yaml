@@ -1,7 +1,12 @@
 enabled: true
-built_in_css: true
 api_key: null
-lastfm_user: username
-image_size: medium
+lastfm_username: username
 limit: 10
-cache_lifetime: 500
+width: 280
+height: 280
+image_size: medium
+background_color: 'transparent'
+display: 7
+path: /_lastfm
+cache_enabled: true
+cache_lifetime: 300
