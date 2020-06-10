@@ -64,33 +64,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-.lastfm-reload-button {
-    background: transparent;
-    border: none;
-    padding: 4px;
-    transition: all .3 ease;
-}
-
-.lastfm-reload-button:focus,
-.lastfm-reload-button:active {
-    border: none;
-    outline: steelblue;
-}
-
-.lastfm-reload-button.animate-reloading svg {
-    animation: reloading 1000ms linear infinite;
-}
-
-@-moz-keyframes reloading {
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes reloading {
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes reloading {
-    to {transform:rotate(360deg);}
-}
-</style>

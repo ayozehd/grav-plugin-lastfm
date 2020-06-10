@@ -45,20 +45,20 @@ form:
           label: Last.fm Username
           placeholder: Username
           help: Find your Last.fm username in your profile
-        limit:
-          type: number
-          size: small
-          label: Limit
-          help: 'Number of tracks to display in the carousel. Last.fm limitation up to 50'
-          validate:
-            max: 50
-            min: 1
     appearance.fieldset:
       type: fieldset
       title: Appearance
       icon: paint-brush
       collapsible: true
       fields:
+        limit:
+          type: number
+          size: small
+          label: Total
+          help: 'Number of slides fetched from API. Last.fm limitation up to 50'
+          validate:
+            max: 50
+            min: 1
         width:
           type: number
           size: small

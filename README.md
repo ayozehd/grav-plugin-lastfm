@@ -40,20 +40,22 @@ Otherwise you can use a function which returns same results:
 ### Settings
 
 | Variable | Default | Options | Note |
-|----------|---------|-------------------------------------------------|-----------------------------------------------------------------------|
+|----------|---------|-------------------------------------------------|-------------------------------------------|
 | enabled | true | `true` or `false` | Enables or disables the plugin. |
-| built_in_css | true | `true` or `false` | Disable plugin CSS. |
 | lastfm_user | null | `username` | Your Last.fm username (*) |
 | api_key | null | `xxx` | Create an [API Account](https://www.last.fm/api/account/create) and get your API Key (*) |
+| limit | 10 | `int` < 50 | Total slides fetched. Last.fm limitation up to 50.|
+| width | 280 | `int` | Width of slides image |
+| height | 280 | `int` | Height of slides image |
 | image_size | `medium` | `small`, `medium`, `large`  or `extralarge` | Set an image size for latest song album |
-| limit | 10 | `int` < 50 | Max 50 tracks allowed by Last.fm |
-| cache_lifetime | 500 | `int` (seconds) | How much long should keep data stored in cache |
+| background_color | `'transparent'` | `rgba` or `hex` color | Widget background color |
+| display | 7 | `int` <= 25 | Number of slides to display |
+| path | `/_lastfm` | `/route` | Define the route for Vue app. Useful in case of collision |
+| cache_enabled | `true` | `bool` | Store API response in cache. Disable it during development. |
+| cache_lifetime | 300 | `int` (seconds) | How much long should keep data stored in cache |
 
 (*) Required
 
-## Extending
-
-Use a SCSS-compiler, like LibSass, and compile assets/scss/lastfm.scss to your assets in the plugin-folder. For example: `sass --watch --source-map true assets/scss/lastfm.scss assets/scss/lastfm.css`.
 
 ## License
 

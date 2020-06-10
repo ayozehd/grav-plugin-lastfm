@@ -6,7 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ASSET_PATH = process.env.ASSET_PATH || '../dist/';
 
 module.exports = {
-  mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'production',
+  mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
   entry: [
     './src/app.js'
   ],
@@ -32,13 +32,11 @@ module.exports = {
       },
     ]
   },
-  optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin()],
-  },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css'
-    })
+    }),
+    new OptimizeCSSAssetsPlugin({})
   ]
 }
