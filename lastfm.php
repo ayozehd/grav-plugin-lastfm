@@ -111,7 +111,7 @@ class LastfmPlugin extends Plugin
 
     public function onAssetsInitialized()
     {
-        $this->grav['assets']->addCss('plugin://lastfm/dist/style.css');
+        $this->grav['assets']->addCss('plugin://lastfm/dist/style.min.css');
         $this->grav['assets']->addInlineJs(sprintf("window.lastfm_path = '%s';", $this->config->get('plugins.lastfm.path')));
         $this->grav['assets']->addJs('plugin://lastfm/dist/main.js', [
             'loading' => 'defer'
