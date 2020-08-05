@@ -6,7 +6,7 @@
     <div class="lastfm-toolbar" v-if="!isLoading">
       <ReloadButton :onclick="fetchData" :width="16" :height="16" :color="yiqBackground" :errorHandler="this.displayError"/>
     </div>
-    <carousel-3d v-if="isLoading === false" ref="carousel" :count="slides.length" :width="width" :height="height"
+    <carousel-3d v-if="!isLoading" ref="carousel" :count="slides.length" :width="width" :height="height"
                 :onMainSlideClick="toggleInfo" @before-slide-change="defaultMainSlide" :display="display" :loop="true">
         <slide v-for="(slide, i) in slides" :index="i" :key="i">
           <template slot-scope="{ isCurrent }">
@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import AppLoader from './AppLoader.vue'
-import ReloadButton from './ReloadButton.vue'
-import NowPlaying from './NowPlaying.vue'
-import './styles.css'
-import utils from './utils.js'
+import AppLoader from './AppLoader.vue';
+import ReloadButton from './ReloadButton.vue';
+import NowPlaying from './NowPlaying.vue';
+import utils from './utils.js';
+import './styles.css';
 
 export default {
   components: {
@@ -102,10 +102,14 @@ export default {
       if (data.slides)
         this.slides = data.slides
 
-      if (data.error)
+      if (data.error) {
         this.error = data.error
-
-      this.isLoading = false
+        this.isError = true
+        
+      } else {
+        this.isLoading = false
+      }
+      
     },
     errorResponse(err) {
       this.isLoading = false;

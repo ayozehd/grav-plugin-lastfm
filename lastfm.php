@@ -53,6 +53,7 @@ class LastfmPlugin extends Plugin
         ];
 
         $data = null;
+        $error = null;
 
         $cache_enabled = $this->config->get('plugins.lastfm.cache_enabled');
         
@@ -73,7 +74,7 @@ class LastfmPlugin extends Plugin
             $api_key = $this->config->get('plugins.lastfm.api_key');
             
             if (!$username || !$api_key) {
-                $output['error'] = 'Your Last.fm username or API Key is not configured. Please review your plugin settings.';
+                $error = 'Last.fm username or API Key is empty. Review your plugin settings.';
             } else {
                 try {
                     $data = $this->lastfmApiRequest(
@@ -84,6 +85,7 @@ class LastfmPlugin extends Plugin
     
                 } catch(Exception $e) {
                     $this->grav['log']->error('plugin.lastfm: '. $e->getMessage());
+                    $error = $e->getMessage();
                 }
 
                 if ($cache_enabled)
@@ -92,6 +94,7 @@ class LastfmPlugin extends Plugin
         }
 
         $output['slides'] = $data;
+        $output['error'] = $error;
 
         header('Content-Type: application/json');
         echo json_encode($output);
