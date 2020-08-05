@@ -16,10 +16,7 @@
     flex-direction: column;     /* make main axis vertical (default setting) */
     justify-content: center; /* center items horizontally, in this case */
     align-items: center;     /* center items vertically, in this case */
-    position: absolute;
     min-width: 100%;
-    top: 0;
-    bottom: 0;
     box-sizing: border-box;
 }
 
@@ -31,13 +28,15 @@
 }
 
 .lastfm-info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
     background-color: rgba(0, 0, 0, .55);
     padding: 15px;
     color: #fefefe;
     font-size: 1.1vh;
     text-align: center;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .lastfm-info-box {
@@ -131,7 +130,7 @@
 
 /** AppLoader **/
 .grav-plugin-lastfm-app-loader {
-    display: inline-block;
+    display: block;
     position: relative;
     width: 80px;
     height: 80px;
