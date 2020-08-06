@@ -1,6 +1,6 @@
 # Last.fm Plugin
 
-Plugin for [Grav](http://github.com/getgrav/grav) that adds a cover scrobbler of your latest played songs thanks to [Last.fm](https://last.fm) API.
+Plugin for [Grav](http://github.com/getgrav/grav) that adds scrobbler of your latest played songs using the [Last.fm](https://last.fm) API.
 
 ![](screenshot.png)
 
@@ -32,7 +32,7 @@ Include this line in your template.html.twig file:
 {% include 'partials/lastfm.html.twig' %}
 ```
 
-Otherwise you can use a function which returns same results:
+Or you can use a Twig function:
 ```
 {{ lastfm() }}
 ```
@@ -42,16 +42,16 @@ Otherwise you can use a function which returns same results:
 | Variable | Default | Options | Note |
 |----------|---------|-------------------------------------------------|-------------------------------------------|
 | enabled | true | `true` or `false` | Enables or disables the plugin. |
-| lastfm_user | null | `username` | Your Last.fm username (*) |
+| lastfm_username | null | `your_username` | Last.fm username (*) |
 | api_key | null | `xxx` | Create an [API Account](https://www.last.fm/api/account/create) and get your API Key (*) |
 | limit | 10 | `int` < 50 | Total slides fetched. Last.fm limitation up to 50.|
-| width | 280 | `int` | Width of slides image |
-| height | 280 | `int` | Height of slides image |
-| image_size | `medium` | `small`, `medium`, `large`  or `extralarge` | Set an image size for latest song album |
+| display | 5 | `int` <= 25 | Number of slides to display |
+| width | 280 | `int` | Main slide width |
+| height | 280 | `int` | Main slide height |
+| image_size | `medium` | `small`, `medium`, `large`  or `extralarge` | Set an image size for albums |
 | background_color | `'transparent'` | `rgba` or `hex` color | Widget background color |
-| display | 7 | `int` <= 25 | Number of slides to display |
 | path | `/_lastfm` | `/route` | Define the route for Vue app. Useful in case of collision |
-| cache_enabled | `true` | `bool` | Store API response in cache. Disable it during development. |
+| cache_enabled | `true` | `bool` | Enable or disable cache storage |
 | cache_lifetime | 300 | `int` (seconds) | How much long should keep data stored in cache |
 
 (*) Required

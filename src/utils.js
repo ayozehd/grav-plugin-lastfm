@@ -44,7 +44,10 @@ const contrastYiq = (value, black = '#333', white = '#fff') => {
 		}
 	}
 
-    const [r, g, b, a] = colorValues(value)
+	const [r, g, b, a] = colorValues(value);
+	if (a < 0.1) {
+		return black;
+	}
     const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
     return (yiq >= 128) ? black : white;
 }

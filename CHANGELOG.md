@@ -1,3 +1,13 @@
+# v2.0.1
+##  08-08-2020
+
+1. [](#improved)
+  * Improved error exceptions and display message
+  * Added scroll to slide info when text is so large
+2. [](#bugfix)
+  * Fixed font sizes rescale. Now depends of container width (`vh`)
+  * Updated lodash and elliptic packages for security 
+
 # v2.0.0
 ##  10-06-2020
 

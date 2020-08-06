@@ -112,12 +112,12 @@
 
 .lastfm-error {
     display: inline-block;
-    padding: .5rem 1rem;
+    padding: .25rem .5rem;
     border-radius: 22px;
     background-color: rgba(0, 0, 0, .75);
     margin: 0 auto;
     color: #fff;
-    font-size: 1.2vh;
+    font-size: 1.5vh;
 }
 
 .lastfm-error-close {

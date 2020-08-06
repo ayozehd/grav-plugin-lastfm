@@ -127,15 +127,16 @@ export default {
     }
   },
   computed: {
-    yiqBackground() {
-      return utils.yiq(this.background_color)
-    },
-    appPath() { return window.lastfm_path },
+    yiqBackground() { return utils.yiq(this.background_color || 'transparent')},
+    appPath() {return window.lastfm_path},
     getError() {
       if (!this.error) {
         return 'Unknown error ocurred...'
       }
       return this.error
+    },
+    isNowPlaying() {
+      this.slides.some(x => x.nowplaying == true)
     }
   },
   data() {
