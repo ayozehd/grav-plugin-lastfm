@@ -1,5 +1,5 @@
 name: Last.fm
-version: 2.0.0
+version: 2.0.1
 description: A simple Last.fm scrobbler
 icon: headphones
 author:
@@ -31,7 +31,7 @@ form:
       title: Security
       info: API Key
       markdown: true
-      text: 'Signup or login Last.fm and then [create an API account](https://www.last.fm/api/account/create) to get your API Key:'
+      text: 'Signup or login at [Last.fm](https://www.last.fm/) and then [create an API account](https://www.last.fm/api/account/create) to get your API Key:'
       icon: lock
       collapsible: true
       fields:
@@ -54,40 +54,40 @@ form:
         limit:
           type: number
           size: small
-          label: Total
-          help: 'Number of slides fetched from API. Last.fm limitation up to 50'
+          label: Slides
+          help: 'Total list of slides from Last.fm. Max: 50'
           validate:
             max: 50
+            min: 1
+        display:
+          type: number
+          size: small
+          label: Display
+          help: 'Number of visible slides. Max: 25'
+          validate:
+            max: 25
             min: 1
         width:
           type: number
           size: small
           label: Width
-          help: Main cover width
+          help: Width of main slide
         height:
           type: number
           size: small
           label: Height
-          help: Main cover height
+          help: Height of main slide
         image_size:
           type: select
           size: small
           label: Image size
-          help: Choose a image size for album image
+          help: Choose a size for the album image
           default: medium
           options:
             small: Small
             medium: Medium
             large: Large
             extralarge: Extralarge
-        display:
-          type: number
-          size: small
-          label: Display tracks
-          help: 'Number of covers in slide. Max: 25'
-          validate:
-            max: 25
-            min: 1
         background_color:
           type: colorpicker
           label: Background color
@@ -100,11 +100,12 @@ form:
         path:
           type: text
           label: Route
-          placeholder: '/_lastfm/'
-          help: You might want change this value only in case of collision with your pages. Otherwise set it as default.
+          placeholder: '/_lastfm'
+          help: Change this value only in case of collision with your other pages. `/_lastfm` by default.
         cache_enabled:
           type: toggle
           label: Cache enabled
+          help: Enable or disable the cache storage
           highlight: 1
           default: 1
           options:

@@ -11,46 +11,57 @@
     box-sizing: border-box;
 }
 
-.lastfm-info {
+.lastfm-flex-container {
     display: flex;
-    position: absolute;
-    flex-direction: column;
+    flex-direction: column;     /* make main axis vertical (default setting) */
+    justify-content: center; /* center items horizontally, in this case */
+    align-items: center;     /* center items vertically, in this case */
     min-width: 100%;
-    background-color: rgba(0, 0, 0, .55);
-    top: 0;
-    bottom: 0;
-    padding: 15px;
-    color: #fefefe;
-    font-size: 12px;
-    text-align: center;
     box-sizing: border-box;
 }
 
-.lastfm-info-box {
+.lastfm-flex-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex: 1;
+}
+
+.lastfm-info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .55);
+    padding: 15px;
+    color: #fefefe;
+    font-size: 1.1vh;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.lastfm-info-box {
+    flex: 3;
 }
 
 .lastfm-info-title {
     color: #fff;
-    font-size: 22px;
+    font-size: 3vh;
     margin: 0 auto .5rem;
 }
 
 .lastfm-info-album {
-    font-size: 18px;
+    font-size: 2.2vh;
     margin: 0;
 }
 
 .lastfm-info-artist {
-    margin: 0;
-    font-size: 16px;
+    margin: 4px auto;
+    font-size: 1.8vh;
     font-style: italic;
 }
 
 .lastfm-links {
-    margin: 4px auto 0;
+    padding: 4px auto 0;
     text-align: center;
     vertical-align: middle;
 }
@@ -89,7 +100,7 @@
 .lastfm-info-helper button {
     display: block;
     float: right;
-    padding: 6px;
+    padding: 3px 5px 0;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -99,20 +110,14 @@
     filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, .2));
 }
 
-.lastfm-flex-container { 
-    display: flex;
-    flex-direction: row;     /* make main axis horizontal (default setting) */
-    justify-content: center; /* center items horizontally, in this case */
-    align-items: center;     /* center items vertically, in this case */
-}
-
 .lastfm-error {
     display: inline-block;
-    padding: .5rem 1rem;
+    padding: .25rem .5rem;
     border-radius: 22px;
     background-color: rgba(0, 0, 0, .75);
     margin: 0 auto;
     color: #fff;
+    font-size: 1.5vh;
 }
 
 .lastfm-error-close {
@@ -125,7 +130,7 @@
 
 /** AppLoader **/
 .grav-plugin-lastfm-app-loader {
-    display: inline-block;
+    display: block;
     position: relative;
     width: 80px;
     height: 80px;
@@ -275,6 +280,7 @@
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+/* .fade-leave-active below version 2.1.8 */
+.fade-enter, .fade-leave-to {
     opacity: 0
 }

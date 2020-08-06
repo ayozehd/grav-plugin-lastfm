@@ -2,11 +2,11 @@ enabled: true
 api_key: null
 lastfm_username: username
 limit: 10
+display: 5
 width: 280
 height: 280
 image_size: medium
 background_color: 'transparent'
-display: 7
 path: /_lastfm
 cache_enabled: true
 cache_lifetime: 300
