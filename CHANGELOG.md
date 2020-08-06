@@ -5,7 +5,8 @@
   * Improved error exceptions and display message
   * Added scroll to slide info when text is so large
 2. [](#bugfix)
-  * Fixed font sizes rescale. Now depends of container width (`vh`)
+  * Fixed font sizes rescale. Now depends on container width (`vh`)
+  * Fixed reload button color when background is transparent
   * Updated lodash and elliptic packages for security 
 
 # v2.0.0
