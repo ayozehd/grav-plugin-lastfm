@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ayozehd/grav-plugin-lastfm#readme",
   "dependencies": {
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-carousel-3d": "^0.2.0"
   },
   "devDependencies": {
